@@ -3,9 +3,9 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 
-from rec.src.full_dataset import load_candidates
-from rec.src.preprocess import candidate_to_text
-from rec.src.config import FULL_EMBEDDINGS_FILE
+from src.full_dataset import load_candidates
+from src.preprocess import candidate_to_text
+from src.config import FULL_EMBEDDINGS_FILE
 
 
 def generate_full_embeddings(

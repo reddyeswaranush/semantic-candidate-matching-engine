@@ -1,6 +1,6 @@
 import json
 
-from rec.src.config import SAMPLE_CANDIDATES_FILE
+from src.config import SAMPLE_CANDIDATES_FILE
 
 
 AI_SKILLS = {

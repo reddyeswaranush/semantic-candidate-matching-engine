@@ -1,5 +1,5 @@
-from rec.src.full_retrieval import search_candidates
-from rec.src.submission_generator import save_submission
+from src.full_retrieval import search_candidates
+from src.submission_generator import save_submission
 
 
 def main():

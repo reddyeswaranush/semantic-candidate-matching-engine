@@ -1,6 +1,6 @@
 import csv
 
-from rec.src.full_retrieval import search_candidates
+from src.full_retrieval import search_candidates
 
 
 EXCLUDED_TITLES = {

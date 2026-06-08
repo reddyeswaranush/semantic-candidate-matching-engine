@@ -4,13 +4,13 @@ import numpy as np
 
 from sentence_transformers import SentenceTransformer
 
-from rec.src.config import (
+from src.config import (
     SAMPLE_CANDIDATES_FILE,
     EMBEDDINGS_FILE,
     INDEX_FILE
 )
 
-from rec.src.ranking import compute_final_score
+from src.ranking import compute_final_score
 
 
 def build_faiss_index():

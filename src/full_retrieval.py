@@ -3,13 +3,13 @@ import numpy as np
 
 from sentence_transformers import SentenceTransformer
 
-from rec.src.config import (
+from src.config import (
     FULL_EMBEDDINGS_FILE,
     FULL_INDEX_FILE
 )
 
-from rec.src.full_dataset import load_candidates
-from rec.src.ranking import compute_final_score
+from src.full_dataset import load_candidates
+from src.ranking import compute_final_score
 
 
 def build_full_index():

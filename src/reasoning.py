@@ -1,34 +1,39 @@
 def generate_reasoning(candidate):
 
-    title = candidate["profile"].get(
-        "current_title",
-        "Unknown"
+    title = (
+        candidate["profile"]
+        .get("current_title", "")
     )
 
-    years = candidate["profile"].get(
-        "years_of_experience",
-        0
+    years = (
+        candidate["profile"]
+        .get("years_of_experience", 0)
     )
 
     skills = [
         skill.get("name", "")
-        for skill in candidate.get("skills", [])[:5]
+        for skill in candidate.get(
+            "skills",
+            []
+        )[:5]
     ]
 
     skills_text = ", ".join(skills)
 
     return (
-        f"{years} years of experience as {title}. "
-        f"Strong technical skills including {skills_text}. "
-        f"Profile demonstrates relevant experience for "
-        f"AI, machine learning, retrieval, and ranking systems."
+        f"{years} years of experience as "
+        f"{title}. Strong expertise in "
+        f"{skills_text}. Profile demonstrates "
+        f"relevance to AI/ML engineering, "
+        f"semantic search, retrieval systems, "
+        f"ranking frameworks, and recommendation systems."
     )
 
 
 if __name__ == "__main__":
 
     import json
-    from rec.src.config import SAMPLE_CANDIDATES_FILE
+    from src.config import SAMPLE_CANDIDATES_FILE
 
     with open(
         SAMPLE_CANDIDATES_FILE,

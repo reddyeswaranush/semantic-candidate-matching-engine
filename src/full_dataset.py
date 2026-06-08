@@ -1,6 +1,6 @@
 import json
 
-from rec.src.config import CANDIDATES_FILE
+from src.config import CANDIDATES_FILE
 
 
 def load_candidates(limit=None):
