@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+
+venv/
+.env
+
+data/embeddings/
+data/indexes/
+data/candidates.jsonl
+
+outputs/
+
+*.npy
+*.faiss
