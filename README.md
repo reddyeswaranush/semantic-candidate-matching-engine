@@ -1,153 +1,210 @@
-# Intelligent Candidate Discovery & Ranking System
+# Semantic Candidate Matching Engine
 
-## Overview
+AI-powered talent intelligence platform for semantic candidate discovery, hybrid ranking, and explainable hiring recommendations.
 
-This project implements an AI-powered candidate discovery and ranking platform capable of identifying highly relevant candidates from a dataset containing 100,000+ profiles. The solution combines semantic retrieval using transformer-based embeddings with a hybrid ranking framework to generate accurate, scalable, and explainable candidate recommendations.
+## Live Demo
+
+Streamlit App:
+https://semantic-candidate-matching-engine-uxggpfryj2kq3kta4bxawr.streamlit.app/
+
+GitHub Repository:
+https://github.com/reddyeswaranush/semantic-candidate-matching-engine
+
+---
 
 ## Problem Statement
 
-Traditional Applicant Tracking Systems (ATS) rely heavily on keyword matching, often failing to identify qualified candidates when terminology differs across resumes and job descriptions. This project addresses that challenge through semantic search and multi-signal ranking.
+Traditional resume filtering systems rely heavily on keyword matching, causing highly relevant candidates to be overlooked when their resumes use different terminology.
 
-## Solution Architecture
+This project uses semantic search and hybrid ranking to identify the most relevant candidates based on meaning rather than exact keyword matches.
+
+---
+
+## Features
+
+* Semantic candidate search using BGE embeddings
+* FAISS vector similarity retrieval
+* Hybrid 11-signal ranking engine
+* Query-aware role detection
+* Explainable candidate reasoning
+* Candidate upload through CSV or Excel
+* Automatic embedding generation and index rebuilding
+* Recruiter-friendly Streamlit dashboard
+* CSV export for shortlisted candidates
+
+---
+
+## System Architecture
 
 Job Description
+→ BGE Embedding Generation
+→ FAISS Vector Search
+→ Top Semantic Matches
+→ Hybrid 11-Signal Ranking Engine
+→ Explainable Candidate Recommendations
 
-↓
+---
 
-Requirement Extraction
+## Tech Stack
 
-↓
-
-BGE Embedding Generation
-
-↓
-
-FAISS Vector Search
-
-↓
-
-Top-K Candidate Retrieval
-
-↓
-
-Hybrid Ranking Engine
-
-↓
-
-Explainability Layer
-
-↓
-
-Final Candidate Recommendations
-
-## Key Features
-
-* Semantic candidate matching using transformer embeddings
-* High-speed retrieval using FAISS vector indexing
-* Hybrid multi-signal ranking framework
-* Explainable candidate recommendations
-* Scalable processing for 100K+ candidate profiles
-* Automated submission generation pipeline
-
-## Technology Stack
-
-### AI & Retrieval
+### Machine Learning
 
 * BAAI/bge-small-en-v1.5
 * Sentence Transformers
-* FAISS
+* NumPy
 
-### Development
+### Vector Search
+
+* FAISS IndexFlatIP
+* Cosine Similarity Retrieval
+
+### Backend
 
 * Python
-* NumPy
-* JSON
-* CSV
+* JSON Storage Layer
 
-## Ranking Methodology
+### Frontend
 
-Candidates are evaluated using a weighted hybrid scoring framework combining:
+* Streamlit
 
-* Semantic Similarity
-* Technical Skills
-* Current Role Relevance
-* Experience Level
-* Career History Signals
-* Education
-* Certifications
-* Behavioral Signals
-* Seniority Indicators
+### Data Processing
 
-## Scalability Features
+* Pandas
+* OpenPyXL
 
-* Offline embedding generation
-* Batch processing pipeline
-* Chunk-based dataset processing
-* FAISS vector indexing
-* Efficient retrieval for large candidate datasets
-* Support for 100,000+ profiles
+---
 
-## Repository Structure
+## Candidate Search Pipeline
 
-```text
-src/
-├── preprocess.py
-├── full_dataset.py
-├── full_embeddings.py
-├── full_retrieval.py
-├── ranking.py
-├── reasoning.py
-├── submission_generator.py
-└── run_pipeline.py
+### Step 1: Candidate Upload
 
-data/
-├── sample_candidates.json
-├── candidate_schema.json
-├── sample_submission.csv
-└── challenge documents
-```
+Recruiters upload candidate data in CSV or Excel format.
 
-## Installation
+Required fields:
 
-```bash
-pip install -r requirements.txt
-```
+* candidate_id
+* current_title
+* years_of_experience
+* current_company
+* skills
 
-## Usage
+### Step 2: Embedding Generation
 
-### Generate Embeddings
+Each candidate profile is converted into a semantic representation using BGE embeddings.
 
-```bash
-python src/full_embeddings.py
-```
+Output:
 
-### Build Retrieval Index
+* 384-dimensional embedding vector
 
-```bash
-python src/full_retrieval.py
-```
+### Step 3: Vector Indexing
 
-### Generate Submission
+Candidate embeddings are stored inside a FAISS vector index for efficient similarity search.
 
-```bash
-python src/submission_generator.py
-```
+### Step 4: Semantic Retrieval
 
-### Run Complete Pipeline
+The job description is embedded and matched against all candidate embeddings using cosine similarity.
 
-```bash
-python src/run_pipeline.py
-```
+### Step 5: Hybrid Ranking
 
-## Results
+Retrieved candidates are ranked using multiple signals:
 
-* Dataset Size: 100,000+ Candidates
-* Embedding Model: BGE Small v1.5
-* Vector Search: FAISS
-* Retrieval Strategy: Semantic Search
-* Ranking Strategy: Hybrid Multi-Signal Ranking
-* Output: Explainable Candidate Recommendations
+* Semantic Score
+* Skill Match Score
+* Experience Score
+* Career Score
+* Title Match Score
+* Behavior Score
+* Seniority Score
+* Company Score
+* Role Profile Matching
+* Query-Aware Skill Alignment
+* Final Weighted Ranking
 
-## Note
+### Step 6: Explainable Results
 
-Large datasets, generated embeddings, and FAISS index files are excluded from the repository to reduce storage requirements. These artifacts can be regenerated using the provided pipeline scripts.
+Each recommendation includes recruiter-friendly reasoning explaining why the candidate was selected.
+
+---
+
+## Example Use Cases
+
+### Machine Learning Hiring
+
+Find candidates with:
+
+* Python
+* Machine Learning
+* NLP
+* FAISS
+* RAG
+* PyTorch
+
+### Data Analytics Hiring
+
+Find candidates with:
+
+* SQL
+* Power BI
+* Tableau
+* Excel
+
+### Frontend Hiring
+
+Find candidates with:
+
+* React
+* TypeScript
+* JavaScript
+* Next.js
+
+### Backend Hiring
+
+Find candidates with:
+
+* Python
+* Java
+* Docker
+* Kubernetes
+* PostgreSQL
+
+---
+
+## Deployment
+
+The application is deployed using Streamlit Cloud.
+
+The system supports:
+
+* Candidate upload
+* Semantic retrieval
+* FAISS indexing
+* Explainable ranking
+* CSV export
+
+---
+
+## Future Improvements
+
+* Multi-company workspaces
+* PostgreSQL storage backend
+* Candidate profile enrichment
+* LLM-powered recruiter summaries
+* Advanced analytics dashboard
+* API-based integrations
+* Authentication and role-based access
+
+---
+
+## Author
+
+Reddy Eswar Anush
+
+B.Tech Computer Science & Engineering
+
+National Institute of Technology Agartala
+
+GitHub:
+https://github.com/reddyeswaranush
+
+LinkedIn:
+[www.linkedin.com/in/reddy-eswar-anush](http://www.linkedin.com/in/reddy-eswar-anush)
