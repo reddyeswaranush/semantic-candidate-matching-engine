@@ -1,13 +1,16 @@
 import json
 import os
 
-
 STORAGE_FILE = (
     "storage/uploaded_candidates.json"
 )
 
-
 def create_storage():
+
+    os.makedirs(
+        "storage",
+        exist_ok=True
+    )
 
     if not os.path.exists(
         STORAGE_FILE
