@@ -285,7 +285,7 @@ National Institute of Technology Agartala
 https://github.com/reddyeswaranush
 
 **LinkedIn**  
-https://www.linkedin.com/in/reddy-eswar-anush
+https://www.linkedin.com/in/reddy-eswar/
 
 **Project Repository**  
 https://github.com/reddyeswaranush/semantic-candidate-matching-engine
