@@ -111,18 +111,31 @@ Recruiters can upload candidate profiles using CSV or Excel files. The system au
 semantic-candidate-matching-engine/
 │
 ├── app.py
+├── requirements.txt
+├── README.md
+├── migrate.py
+├── setup.py
+│
+├── assets/
+│   ├── dashboard.png
+│   ├── search_interface.png
+│   ├── search_results.png
+│   ├── candidate_details.png
+│   ├── upload_candidates.png
+│   └── architecture.png
+│
 ├── src/
+│   ├── candidate_schema.py
+│   ├── candidate_upload.py
+│   ├── storage_manager.py
 │   ├── full_embeddings.py
 │   ├── full_retrieval.py
 │   ├── ranking.py
 │   ├── reasoning.py
-│   ├── storage_manager.py
-│   └── candidate_upload.py
+│   └── submission_generator.py
 │
-├── assets/
 ├── data/
-├── storage/
-└── requirements.txt
+└── storage/
 ```
 ---
 
