@@ -1,34 +1,63 @@
-def generate_reasoning(candidate):
+def generate_reasoning(candidate, query=""):
 
-    title = (
-        candidate["profile"]
-        .get("current_title", "")
+    profile = candidate.get("profile", {})
+
+    title = profile.get(
+        "current_title",
+        "Professional"
     )
 
-    years = (
-        candidate["profile"]
-        .get("years_of_experience", 0)
+    years = profile.get(
+        "years_of_experience",
+        0
     )
 
     skills = [
         skill.get("name", "")
-        for skill in candidate.get(
-            "skills",
-            []
-        )[:5]
+        for skill in candidate.get("skills", [])
+        if skill.get("name")
     ]
 
-    skills_text = ", ".join(skills)
+    top_skills = skills[:5]
 
-    return (
-        f"{years} years of experience as "
-        f"{title}. Strong expertise in "
-        f"{skills_text}. Profile demonstrates "
-        f"relevance to AI/ML engineering, "
-        f"semantic search, retrieval systems, "
-        f"ranking frameworks, and recommendation systems."
+    skills_text = (
+        ", ".join(top_skills)
+        if top_skills
+        else "relevant technologies"
     )
 
+    query_lower = query.lower()
+
+    matched_skills = []
+
+    for skill in skills:
+
+        if skill.lower() in query_lower:
+            matched_skills.append(
+                skill
+            )
+
+    matched_skills = matched_skills[:5]
+
+    if matched_skills:
+
+        matched_text = ", ".join(
+            matched_skills
+        )
+
+        return (
+            f"Candidate brings {years:.1f} years of experience as "
+            f"{title}. Demonstrates expertise in {skills_text}. "
+            f"Strong alignment with the role requirements through "
+            f"experience in {matched_text}."
+        )
+
+    return (
+        f"Candidate has {years:.1f} years of experience as "
+        f"{title}. Strong expertise in {skills_text}. "
+        f"Profile shows relevant technical capabilities "
+        f"for the target role."
+    )
 
 if __name__ == "__main__":
 

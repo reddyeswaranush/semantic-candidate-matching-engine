@@ -1,7 +1,7 @@
 import csv
 
 from src.full_retrieval import search_candidates
-
+from src.reasoning import generate_reasoning
 
 EXCLUDED_TITLES = {
     "sales executive",
@@ -15,47 +15,9 @@ EXCLUDED_TITLES = {
 }
 
 
-def generate_reasoning(candidate):
-
-    title = (
-        candidate["profile"]
-        .get("current_title", "")
-    )
-
-    years = (
-        candidate["profile"]
-        .get("years_of_experience", 0)
-    )
-
-    skills = [
-        skill.get("name", "")
-        for skill in candidate.get(
-            "skills",
-            []
-        )[:5]
-    ]
-
-    skills_text = ", ".join(
-        skills
-    )
-
-    reasoning = (
-        f"{years} years of experience as "
-        f"{title}. "
-        f"Strong skills including "
-        f"{skills_text}. "
-        f"Profile shows relevance to "
-        f"AI/ML, retrieval systems, "
-        f"ranking systems, recommendation "
-        f"engines, embeddings, and "
-        f"semantic search."
-    )
-
-    return reasoning
-
-
 def save_submission(
     results,
+    query="",
     output_file="outputs/submission.csv"
 ):
 
@@ -110,9 +72,7 @@ def save_submission(
                     ],
                     4
                 ),
-                generate_reasoning(
-                    candidate
-                )
+                generate_reasoning(candidate, query)
             ])
 
     print(
@@ -155,5 +115,6 @@ if __name__ == "__main__":
     )
 
     save_submission(
-        results
+        results,
+        query=query
     )

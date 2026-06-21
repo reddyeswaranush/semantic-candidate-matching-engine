@@ -1,9 +1,8 @@
+import os
 import numpy as np
 
 from sentence_transformers import SentenceTransformer
-from tqdm import tqdm
-
-from src.full_dataset import load_candidates
+from src.storage_manager import load_candidates
 from src.preprocess import candidate_to_text
 from src.config import FULL_EMBEDDINGS_FILE
 
@@ -21,12 +20,19 @@ def generate_full_embeddings(
 
     print("Loading candidates...")
 
-    candidates = load_candidates(
-        limit=limit
-    )
+    candidates = load_candidates()
+
+    if limit:
+        candidates = candidates[:limit]
 
     print(
         f"Loaded {len(candidates)} candidates"
+    )
+
+    chunk_dir = "storage/embedding_chunks"
+    os.makedirs(
+        chunk_dir,
+        exist_ok=True
     )
 
     all_embeddings = []
@@ -47,6 +53,28 @@ def generate_full_embeddings(
             f"{start} → {end}"
         )
 
+        chunk_file = (
+            f"{chunk_dir}/chunk_{start}_{end}.npy"
+        )
+
+        if os.path.exists(
+            chunk_file
+        ):
+
+            print(
+                f"Skipping {start} → {end}"
+            )
+
+            embeddings = np.load(
+                chunk_file
+            )
+
+            all_embeddings.append(
+                embeddings
+            )
+
+            continue
+
         batch_candidates = (
             candidates[start:end]
         )
@@ -63,6 +91,15 @@ def generate_full_embeddings(
             convert_to_numpy=True
         )
 
+        np.save(
+            chunk_file,
+            embeddings
+        )
+
+        print(
+            f"Saved {chunk_file}"
+        )
+
         all_embeddings.append(
             embeddings
         )
@@ -77,7 +114,7 @@ def generate_full_embeddings(
     )
 
     print(
-        f"\nSaved embeddings:"
+        "\nSaved embeddings:"
     )
 
     print(

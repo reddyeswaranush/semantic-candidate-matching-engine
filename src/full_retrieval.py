@@ -8,7 +8,7 @@ from src.config import (
     FULL_INDEX_FILE
 )
 
-from src.full_dataset import load_candidates
+from src.storage_manager import load_candidates
 from src.ranking import compute_final_score
 
 
@@ -54,9 +54,7 @@ def search_candidates(
     top_k=20
 ):
 
-    candidates = load_candidates(
-        limit=limit
-    )
+    candidates = load_candidates()
 
     index = faiss.read_index(
         str(FULL_INDEX_FILE)
@@ -65,6 +63,8 @@ def search_candidates(
     model = SentenceTransformer(
         "BAAI/bge-small-en-v1.5"
     )
+
+    original_query = query
 
     query = (
         "Represent this candidate search query: "
@@ -100,10 +100,10 @@ def search_candidates(
         ranking_result = (
             compute_final_score(
                 candidate,
-                semantic_score
+                semantic_score,
+                query=original_query
             )
         )
-
         results.append({
             "candidate": candidate,
             "semantic_score": semantic_score,
